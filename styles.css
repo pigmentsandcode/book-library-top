@@ -4,6 +4,14 @@ body {
   font-family: Tahoma, Verdana, Segoe, sans-serif;
 }
 
+#add-book-btn {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  background-color: #7799e7;
+  border: none;
+  padding: 0.5rem;
+}
+
 table {
   border: 1px #a39485 solid;
   font-size: 0.9em;
@@ -30,13 +38,33 @@ th {
   vertical-align: middle;
 }
 
+.pages-header,
+.status-header,
+.del-header {
+  text-align: center;
+}
+
 td {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   background: #fff;
+  font-size: 1rem;
+}
+
+td.book-pages,
+td.book-status,
+td.book-delete {
+  text-align: center;
+}
+
+.status-btn {
+  border: none;
+  font-size: 1rem;
+  color: #222;
+  width: 4rem;
 }
 
 .unread {
-  background-color: #d64141;
+  background-color: #f17c7c;
 }
 
 .read {
