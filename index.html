@@ -9,6 +9,45 @@
   <body>
     <h1>Book Library</h1>
     <div class="library-container">
+      <div class="add-book-container">
+        <button id="add-book-btn">Add a Book</button>
+        <dialog id="add-book-modal">
+          <form action="get" method="dialog" id="add-book-form">
+            <label for="title">Title: </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              class="title-input text-input"
+            />
+            <label for="author">Author: </label>
+            <input
+              type="text"
+              id="author"
+              name="author"
+              class="author-input text-input"
+            />
+            <label for="page-count">Page Count: </label>
+            <input
+              type="number"
+              id="page-count"
+              name="page-count"
+              id="page-count"
+            />
+            <fieldset>
+              <legend>Read Status</legend>
+              <input type="radio" id="read" name="status" value="read" />
+              <label for="read">Read</label>
+              <input type="radio" id="unread" name="status" value="unread" />
+              <label for="unread">Unread</label>
+            </fieldset>
+            <div class="form-btns">
+              <button id="cancel-btn" class="dialog-btn">Cancel</button>
+              <button id="add-btn" class="dialog-btn">Add Book</button>
+            </div>
+          </form>
+        </dialog>
+      </div>
       <div class="books-list-container">
         <table>
           <thead>

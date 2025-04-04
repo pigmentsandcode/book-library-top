@@ -12,9 +12,21 @@ function Book(title, author, numPages, read) {
   this.read = read;
 }
 
+Book.prototype.toggleRead = function () {
+  this.read = this.read === "read" ? "unread" : "read";
+};
+
 function addBookToLibrary(title, author, numPages, read) {
   const newBook = new Book(title, author, numPages, read);
   myLibrary.push(newBook);
+  return newBook;
+}
+
+function getBookIndex(bookId) {
+  const bookIndex = myLibrary.findIndex((libBook) => {
+    return bookId == libBook.id;
+  });
+  return bookIndex;
 }
 
 addBookToLibrary("My Best Book", "Karen Karen", 83, "read");
@@ -45,6 +57,7 @@ function addBookToTable(bookObj) {
   statusBtn.classList.add("status-btn", `${bookObj.read}`);
   statusBtn.setAttribute("data-id", bookObj.id);
   statusBtn.textContent = bookObj.read == "read" ? "Read" : "Unread";
+  statusBtn.addEventListener("click", handleToggleStatus);
   statusCell.append(statusBtn);
 
   const delCell = newRow.insertCell();
@@ -53,6 +66,7 @@ function addBookToTable(bookObj) {
   delBtn.classList.add("del-btn");
   delBtn.setAttribute("data-id", bookObj.id);
   delBtn.textContent = "Delete";
+  delBtn.addEventListener("click", handleDelete);
   delCell.append(delBtn);
 }
 
@@ -61,5 +75,63 @@ function populateDisplay() {
     addBookToTable(book);
   });
 }
+
+function updateDisplay(action, bookId) {
+  if (action === "delete") {
+    const trDel = tbodyEl.querySelector(`tr[data-id='${bookId}']`);
+    trDel.remove();
+  }
+}
+
+function handleToggleStatus(e) {
+  const bookId = e.target.dataset.id;
+  const book = myLibrary[getBookIndex(bookId)];
+  e.target.classList.remove(book.read);
+  book.toggleRead();
+  e.target.classList.add(book.read);
+  e.target.textContent = book.read == "read" ? "Read" : "Unread";
+}
+
+function handleDelete(e) {
+  const bookId = e.target.dataset.id;
+  const bookIndex = getBookIndex(bookId);
+  myLibrary.splice(bookIndex, 1);
+  updateDisplay("delete", bookId);
+}
+
+function handleAddBook(e) {
+  e.preventDefault();
+  const newTitle = document.querySelector("#title").value;
+  const newAuthor = document.querySelector("#author").value;
+  const newPages = document.querySelector("#page-count").value;
+  const radioButtons = document.querySelectorAll('input[name="status"]');
+  let status = "";
+  radioButtons.forEach((radio) => {
+    if (radio.checked) {
+      status = radio.value;
+    }
+  });
+  const newBook = addBookToLibrary(newTitle, newAuthor, newPages, status);
+  addBookToTable(newBook);
+  document.querySelector("#add-book-form").reset();
+  const dialog = document.querySelector("dialog");
+  dialog.close();
+}
+
+// Event Listeners Dialog
+const addBookBtn = document.querySelector("#add-book-btn");
+addBookBtn.addEventListener("click", (e) => {
+  const dialog = document.querySelector("dialog");
+  dialog.showModal();
+});
+const cancelDialogBtn = document.querySelector("#cancel-btn");
+cancelDialogBtn.addEventListener("click", (e) => {
+  document.querySelector("#add-book-form").reset();
+  const dialog = document.querySelector("dialog");
+  dialog.close();
+});
+
+const addDialogBtn = document.querySelector("#add-btn");
+addDialogBtn.addEventListener("click", handleAddBook);
 
 populateDisplay();
