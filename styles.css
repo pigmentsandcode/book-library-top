@@ -56,11 +56,15 @@ td.book-delete {
   text-align: center;
 }
 
-.status-btn {
-  border: none;
+.status-btn,
+.del-btn {
   font-size: 1rem;
   color: #222;
   width: 4rem;
+}
+
+.status-btn {
+  border: none;
 }
 
 .unread {
@@ -69,4 +73,50 @@ td.book-delete {
 
 .read {
   background-color: lightgreen;
+}
+
+.del-btn {
+  border: 1px solid #aaa;
+}
+
+/* Add book form */
+
+dialog {
+  padding: 2rem;
+}
+
+form {
+  display: grid;
+  height: 45vh;
+  width: 25vw;
+}
+
+form h3 {
+  margin-top: 0;
+}
+
+.text-input,
+.page-input {
+  height: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+fieldset {
+  margin-bottom: 1rem;
+  border: none;
+  padding: 0;
+}
+
+fieldset legend {
+  margin-bottom: 3px;
+}
+
+.form-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog-btn {
+  font-size: 1rem;
 }
