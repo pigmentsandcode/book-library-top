@@ -4,6 +4,6 @@ Library project from The Odin Project found at [https://www.theodinproject.com/l
 
 ## Concepts Used
 
-- JS object constructor and prototype
+- Refactored from object constructors to using JS Classes
 - dynamically adding and removing rows to HTML table
 - HTML modal form

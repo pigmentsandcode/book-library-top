@@ -1,20 +1,18 @@
 const myLibrary = [];
 
-function Book(title, author, numPages, read) {
-  if (!new.target) {
-    throw Error("Didn't use new keyword to make Book obj");
+class Book {
+  constructor(title, author, numPages, read) {
+    this.id = crypto.randomUUID();
+    this.title = title;
+    this.author = author;
+    this.numPages = numPages;
+    this.read = read;
   }
 
-  this.id = crypto.randomUUID();
-  this.title = title;
-  this.author = author;
-  this.numPages = numPages;
-  this.read = read;
+  toggleRead() {
+    this.read = this.read === "read" ? "unread" : "read";
+  }
 }
-
-Book.prototype.toggleRead = function () {
-  this.read = this.read === "read" ? "unread" : "read";
-};
 
 function addBookToLibrary(title, author, numPages, read) {
   const newBook = new Book(title, author, numPages, read);
